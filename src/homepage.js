@@ -1,4 +1,3 @@
-// make it an immediately invoked function later
 import Image from "./zap's-pizza.jpg";
 
 const createHomepage = () => {

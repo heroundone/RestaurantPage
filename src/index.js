@@ -1,37 +1,13 @@
 import { createHomepage } from './homepage.js';
 import * as tabs from './tabs.js';
+import { menuItem, createMenu } from './menu.js';
 
 // initial load of website upon visit
 (function () {
     createHomepage();
     tabs.createTabs();
+    addTabsListener();
 })();
-
-
-// event listener function for each tab
-
-function addTabsListener() {
-    // get nodelist of all buttons
-    let buttons = document.querySelectorAll('button');
-
-    // add event listener to each
-    buttons.forEach(button => button.addEventListener('click', (e) => {
-
-        // get text of button that was clicked
-        let buttonText = e.target.textContent;
-
-        // check which tab was clicked, and generate content for that tab
-        if(buttonText === 'home') {
-            generatePage(createHomepage());
-        }
-        else if(buttonText === 'menu') {
-            generatePage(createMenu());
-        }
-        else {
-            generatePage(createContact());
-        };
-    }));
-}
 
 // clear content from page
 function clearpage() {
@@ -44,7 +20,31 @@ function clearpage() {
 // generate content for this specific page
 function generatePage(pageFunction) {
     clearpage();
-    pageFunction;
+    pageFunction();
     tabs.createTabs();
     addTabsListener();
+}
+
+// event listener for each tab
+function addTabsListener() {
+    // get nodelist of all buttons
+    let buttons = document.querySelectorAll('button');
+
+    // add event listener to each
+    buttons.forEach(button => button.addEventListener('click', (e) => {
+
+        // get text of button that was clicked
+        let buttonText = e.target.textContent;
+
+        // check which tab was clicked, and generate content for that tab
+        if(buttonText === 'home') {
+            generatePage(createHomepage);
+        }
+        else if(buttonText === 'menu') {
+            generatePage(createMenu);
+        }
+        else {
+            generatePage(createContact);
+        };
+    }));
 }
