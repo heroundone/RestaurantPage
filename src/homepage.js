@@ -36,6 +36,7 @@ const createHomepage = () => {
     blurb.textContent = "Tired of the same old pizza? Need to spice it up some, well Zap's does spice and plenty more."
     addToArray(blurb);
 
+    // add to homepage
     elements.forEach(index => container.appendChild(index));
 
 }
